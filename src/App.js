@@ -7,16 +7,36 @@ import Menubar from './Components/Menubar';
 import Signup from './Components/Signup';
 import Signin from './Components/Signin';
 import MenuBar from './Components/Menubar';
+import Contactus from './Components/Contactus';
+import Homepage from './Components/Homepage';
 
 function App() {
   return (
 
-    <div>
+    // <div>
   
-      <MenuBar></MenuBar>
+    //   <MenuBar></MenuBar>
       
       
+    // </div>
+    
+    <div>
+      <BrowserRouter>
+      <Menubar></Menubar>
+
+      <Routes>
+      <Route path="/" element={<Homepage/>}></Route>
+      <Route path="/Home" element={<Homepage/>}></Route>
+      <Route path="/Signin"element={<Signin/>}></Route>
+      <Route path="/Signup"element={<Signup/>}></Route>
+      <Route path="/Aboutus"element={<Aboutus/>}></Route>
+      <Route path="/Contactus"element={<Contactus/>}></Route>
+      </Routes>
+      </BrowserRouter>
+
     </div>
+
+    
      
 
     //REady Code

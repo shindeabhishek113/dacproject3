@@ -1,8 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import Aboutus from './Aboutus'
+import { useNavigate } from 'react-router-dom';
 // import Switch from 'react-dom'
 const Signin = (props) => {
+  const navigate = useNavigate();
 
   return (
 
@@ -71,7 +73,7 @@ const Signin = (props) => {
 
         <div className="dropdown-divider"></div>
         <a className="dropdown-item" href="#">New around here?</a>
-      <button type="submit" className="btn btn-primary" >Sign up</button>
+      <button type="submit" className="btn btn-primary" onClick={() => navigate("/Signup")}>Sign up</button>
 
       </form>
    
