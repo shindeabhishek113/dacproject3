@@ -3,26 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Route,Router,Routes,BrowserRouter, Switch} from 'react-router-dom'
 import Aboutus from './Components/Aboutus';
-import Menubar from './Components/Menubar';
 import Signup from './Components/Signup';
 import Signin from './Components/Signin';
-import MenuBar from './Components/Menubar';
 import Contactus from './Components/Contactus';
 import Homepage from './Components/Homepage';
+import Menu from './Components/Menu';
+import Customer from './Components/Customer';
+import Distributor from './Components/Distributor';
+import Admin from './Components/Admin';
+import Deliveryperson from './Components/DeliveryPerson';
 
 function App() {
   return (
-
-    // <div>
-  
-    //   <MenuBar></MenuBar>
-      
-      
-    // </div>
     
     <div>
       <BrowserRouter>
-      <Menubar></Menubar>
+      <Menu></Menu>
 
       <Routes>
       <Route path="/" element={<Homepage/>}></Route>
@@ -31,6 +27,11 @@ function App() {
       <Route path="/Signup"element={<Signup/>}></Route>
       <Route path="/Aboutus"element={<Aboutus/>}></Route>
       <Route path="/Contactus"element={<Contactus/>}></Route>
+      <Route path="/Customer"element={<Customer/>}></Route>
+      <Route path="/Distributor"element={<Distributor/>}></Route>
+      <Route path="/Admin"element={<Admin/>}></Route>
+      <Route path="/Deliveryperson"element={<Deliveryperson/>}></Route>
+
       </Routes>
       </BrowserRouter>
 

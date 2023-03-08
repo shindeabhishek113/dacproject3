@@ -1,40 +1,92 @@
 import React from 'react'
-
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Signup = (props) => {
+
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    contactNo: "",
+    role:"",
+    line1:"",
+    line2:"",
+    landmark:"",
+    city: "",
+    district:"",
+    state: "",
+    pincode: "",
+  });
+
+  const changeHandler = (e) => {
+    setData((data) => ({
+      ...data,
+      [e.target.name]: e.target.value
+    }));
+    console.log(e.target.value)
+  }
+
+  const submitData = () => {
+
+
+
+    const obj = {
+      "firstName": data.firstName,"lastName": data.lastName,"email": data.email, 
+      "password": data.password,"contactNo": data.contactNo,"role": data.role,
+      "address": {"line1":data.line1,"line2":data.line2,"landmark":data.landmark,"city": data.city,"district":data.district, "state": data.state,"pincode": data.pincode }
+      
+    }
+      console.log(`in submitData:${obj.email} , ${obj.pincode}`)
+
+    axios.post("http://localhost:8080/auth/signup", obj)
+          .then(response => {
+            console.log("congratulations");
+            navigate(`/Signin`);
+          })
+          .catch(err => {console.log(err)});
+    
+  }
+
+
+
+
+
   return (
     <div>
-
-
-    
+      
     <form className = "card col-md-6 offset-md-3 offset-md-3">
       
       <div className="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" className="form-control" id="firstname"/>
+        <label htmlFor="firstname">First Name</label>
+        <input type="text" name="firstName" value={data.firstName} onChange={changeHandler} className="form-control" id="firstname"/>
       </div>
 
       <div className="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" className="form-control" id="lastName" />
+        <label htmlFor="lastName">Last Name</label>
+        <input type="text" name="lastName" value={data.lastName} onChange={changeHandler} className="form-control" id="lastName" />
       </div>
 
       <div className="form-group">
-        <label for="exampleDropdownFormEmail1">Email address</label>
-        <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com"/>
+        <label htmlFor="exampleDropdownFormEmail1">Email address</label>
+        <input type="email" name="email" value={data.email} onChange={changeHandler} className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com"/>
       </div>
 
       <div className="form-group">
-        <label for="exampleDropdownFormPassword1">Password</label>
-        <input type="password" className="form-control" id="exampleDropdownFormPassword1" placeholder="Password"/>
+        <label htmlFor="exampleDropdownFormPassword1">Password</label>
+        <input type="password" name="password" value={data.password} onChange={changeHandler} className="form-control" id="exampleDropdownFormPassword1" placeholder="Password"/>
       </div>
 
       <div className="form-group">
-        <label for="exampleDropdownFormPassword1">Contact No</label>
-        <input type="text" className="form-control" id="contactno"/>
+        <label htmlFor="exampleDropdownFormPassword1">Contact No</label>
+        <input type="text" name="contactNo" value={data.contactNo} onChange={changeHandler} className="form-control" id="contactno"/>
       </div>
 
-      <label for="role">Choose a Role:</label>
-      <select  id="role">
+      <label htmlFor="role">Choose a Role:</label>
+      <select  id="role" value={data.role} name="role" onChange={changeHandler}>
+      <option>Select</option>
       <option value="ROLE_ADMIN">Admin</option>
       <option value="ROLE_DISTRIBUTOR">Distributor</option>
       <option value="ROLE_CUSTOMER">Customer</option>
@@ -42,45 +94,45 @@ const Signup = (props) => {
       </select>
 
       <div className="form-group">
-        <label for="exampleDropdownFormPassword1">Address:</label>
+        <label htmlFor="exampleDropdownFormPassword1">Address:</label>
       </div>
 
       <div className="form-group">
-        <label for="line1">Line 1</label>
-        <input type="text" className="form-control" id="line1"/>
+        <label htmlFor="line1">Line 1</label>
+        <input type="text" value={data.line1} name="line1" onChange={changeHandler} className="form-control" id="line1"/>
       </div>
 
       <div className="form-group">
-        <label for="line1">Line 2</label>
-        <input type="text" className="form-control" id="line2"/>
+        <label htmlFor="line1">Line 2</label>
+        <input type="text" value={data.line2} name="line2" onChange={changeHandler} className="form-control" id="line2"/>
       </div>
 
       <div className="form-group">
-        <label for="landmark">Landmark</label>
-        <input type="text" className="form-control" id="landmark" />
+        <label htmlFor="landmark">Landmark</label>
+        <input type="text" value={data.landmark} name="landmark" onChange={changeHandler} className="form-control" id="landmark" />
       </div>
 
       <div className="form-group">
-        <label for="city">City</label>
-        <input type="text" className="form-control" id="city" />
+        <label htmlFor="city">City</label>
+        <input type="text" value={data.city} name="city" onChange={changeHandler} className="form-control" id="city" />
       </div>
 
       <div className="form-group">
-        <label for="district">District</label>
-        <input type="text" className="form-control" id="district" />
+        <label htmlFor="district">District</label>
+        <input type="text" value={data.district} name="district" onChange={changeHandler} className="form-control" id="district" />
       </div>
 
       <div className="form-group">
-        <label for="state">State</label>
-        <input type="text" className="form-control" id="state" />
+        <label htmlFor="state">State</label>
+        <input type="text" value={data.state} name="state" onChange={changeHandler} className="form-control" id="state" />
       </div>
 
       <div className="form-group">
-        <label for="pincode">Pincode</label>
-        <input type="text" className="form-control" id="pincode" />
+        <label htmlFor="pincode">Pincode</label>
+        <input type="number" value={data.pincode} name="pincode" onChange={changeHandler} className="form-control" id="pincode" />
       </div>
 
-        <button type="submit" className="btn btn-primary">Sign in</button>
+        <button type="button" className="btn btn-primary" onClick={submitData}>Sign up</button>
 
         <div className="dropdown-divider"></div>
 
