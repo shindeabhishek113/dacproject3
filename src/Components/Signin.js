@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import swal from "sweetalert";
-// import Switch from 'react-dom'
+import mystore from "./Store";
+
 const Signin = (props) => {
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ const Signin = (props) => {
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(()=>{
-    // loadCaptchaEnginge(6,'red','black','upper'); 
+    
    },[])
    const handleShowPassword=()=>{
     setIsChecked(!isChecked);
@@ -56,28 +57,33 @@ const Signin = (props) => {
       axios.post("http://localhost:8080/auth/signin", obj)
         .then(response => {
           console.log(response.data);
+          console.log(response.data.id);
           console.log("Role"+response.data.role)
           if(response.data.role.includes("ROLE_CUSTOMER")){
             sessionStorage.setItem("customer",JSON.stringify(response.data))
             navigate(`/Customer`);
+            mystore.dispatch({ type: 'LOGGEDIN' });
           }
 
           if(response.data.role.includes("ROLE_DISTRIBUTOR")){
             sessionStorage.setItem("distributor",JSON.stringify(response.data))
             navigate(`/Distributor`);
+            mystore.dispatch({ type: 'LOGGEDIN' });
           }
 
           if(response.data.role.includes("ROLE_ADMIN")){
             sessionStorage.setItem("admin",JSON.stringify(response.data))
             navigate(`/Admin`);
+            mystore.dispatch({ type: 'LOGGEDIN' });
           }
 
           if(response.data.role.includes("ROLE_DELIVERYPERSON")){
             sessionStorage.setItem("deliveryperson",JSON.stringify(response.data))
             navigate(`/Deliveryperson`);
+            mystore.dispatch({ type: 'LOGGEDIN' });
           }
 
-          const obj1 = obj; 
+           
 
         })
         .catch(err => {
@@ -88,18 +94,13 @@ const Signin = (props) => {
         
   }
 
-
-    
-  
-
-
   return (
 
   <div>
     <form className = "card col-md-6 offset-md-3 offset-md-3">
       <div className="form-group">
         <label htmlfor="exampleDropdownFormEmail1">Email address</label>
-        <input type="email" name="email" value={data.username} onChange={changeHandler} className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com"/>
+        <input type="email" name="email" value={data.email} onChange={changeHandler} className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com"/>
       </div>
 
       <div className="form-group">
@@ -117,8 +118,8 @@ const Signin = (props) => {
         <a className="dropdown-item" href="#">New around here?</a>
 
       <button type="submit" className="btn btn-primary" onClick={() => navigate("/Signup")}>Sign up</button>
-      <br></br>
-      <button className="btn btn-danger" onClick={(props) => navigate("/")}>Cancel</button> 
+      <br></br><br></br><br></br>
+      <button className="btn btn-danger" onClick={() => navigate("/")}>Cancel</button> 
 
       </form>
 

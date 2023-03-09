@@ -12,6 +12,10 @@ import Customer from './Components/Customer';
 import Distributor from './Components/Distributor';
 import Admin from './Components/Admin';
 import Deliveryperson from './Components/DeliveryPerson';
+import DeliveredList from './Components/DeliveredList';
+import UpdateProfile from './Components/UpdateProfile';
+import ProductList from './Components/ProductList';
+import SearchProductList from './Components/SearchProductList';
 
 function App() {
   return (
@@ -31,6 +35,10 @@ function App() {
       <Route path="/Distributor"element={<Distributor/>}></Route>
       <Route path="/Admin"element={<Admin/>}></Route>
       <Route path="/Deliveryperson"element={<Deliveryperson/>}></Route>
+      <Route path="/DeliveredList"element={<DeliveredList/>}></Route>
+      <Route path="/UpdateProfile"element={<UpdateProfile/>}></Route>
+      <Route path="/ProductList"element={<ProductList></ProductList>}></Route>
+      <Route path="/SearchProductList"element={<SearchProductList/>}></Route>
 
       </Routes>
       </BrowserRouter>
